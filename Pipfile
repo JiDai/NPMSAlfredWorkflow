@@ -1,0 +1,15 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+alfred-workflow = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "2.7"
+
+[scripts]
+init = 'PIPENV_VENV_IN_PROJECT=1 pipenv install --two && cp -a .venv/lib/python2.7/site-packages/workflow src/'

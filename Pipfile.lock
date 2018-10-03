@@ -1,0 +1,28 @@
+{
+    "_meta": {
+        "hash": {
+            "sha256": "22555372d71c4cec0c054234652f5ebd8529682f0e6bf70e51573c2e3e5020d2"
+        },
+        "pipfile-spec": 6,
+        "requires": {
+            "python_version": "2.7"
+        },
+        "sources": [
+            {
+                "name": "pypi",
+                "url": "https://pypi.org/simple",
+                "verify_ssl": true
+            }
+        ]
+    },
+    "default": {
+        "alfred-workflow": {
+            "hashes": [
+                "sha256:5cf78561231b98255387a8ad4ce9120169d40c87800994b6596bb347192c8980"
+            ],
+            "index": "pypi",
+            "version": "==1.36"
+        }
+    },
+    "develop": {}
+}
