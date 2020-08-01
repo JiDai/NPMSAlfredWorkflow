@@ -23,23 +23,28 @@ def main(wf):
         wf.add_item('HTTPERROR', subtitle=err.message, uid='ma-by-error', arg='')
     else:
         for suggest in suggests:
-            title = suggest['package']['name']
+            package = suggest['package']
+            title = package['name']
             score = '%s%%   Q: %s%%   P: %s%%   M: %s%%' % (
-                int(round(suggest['score']['final']*100, 0)),
-                int(round(suggest['score']['detail']['quality']*100, 0)),
-                int(round(suggest['score']['detail']['popularity']*100, 0)),
-                int(round(suggest['score']['detail']['maintenance']*100, 0)),
+                int(round(suggest['score']['final'] * 100, 0)),
+                int(round(suggest['score']['detail']['quality'] * 100, 0)),
+                int(round(suggest['score']['detail']['popularity'] * 100, 0)),
+                int(round(suggest['score']['detail']['maintenance'] * 100, 0)),
             )
-            if 'description' in suggest['package'] and 'author' in suggest['package']:
-                subtitle = 'by %s, %s' % (suggest['package']['author']['name'], suggest['package']['description'])
-            elif 'description' in suggest['package']:
-                subtitle = suggest['package']['description']
-            elif 'author' in suggest['package']:
-                subtitle = 'by %s' % suggest['package']['author']['name']
+            author = None
+            if 'author' in package and 'name' in package['author']:
+                author = package['author']['name']
+
+            if 'description' in package and author:
+                subtitle = 'by %s, %s' % (author, package['description'])
+            elif 'description' in package:
+                subtitle = package['description']
+            elif author:
+                subtitle = 'by %s' % author
             else:
                 subtitle = 'No description'
-            largetext = '%s\n%s\n%s\nv%s' % (title, subtitle, score, suggest['package']['version'])
-            wf.add_item('%s   %s' % (title, score), subtitle=subtitle, arg=suggest['package']['links']['npm'], valid=True, largetext=largetext)
+            largetext = '%s\n%s\n%s\nv%s' % (title, subtitle, score, package['version'])
+            wf.add_item('%s   %s' % (title, score), subtitle=subtitle, arg=package['links']['npm'], valid=True, largetext=largetext)
 
     wf.send_feedback()
 
